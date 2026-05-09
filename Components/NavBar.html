@@ -1,0 +1,353 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* ── Desktop Nav ─────────────────────────── */
+    .nav.Desktop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-top: 27px;
+    }
+    .nav.Mobile {
+      display: none;
+    }
+
+    .nav > * {
+      width: fit-content;
+      height: fit-content;
+    }
+    .Logo {
+      align-self: flex-start;
+    }
+    .btn-primary {
+      align-self: flex-end;
+    }
+    .Titles {
+      align-self: center;
+    }
+
+    .Titles a {
+      margin-left: 26px;
+      font-family: "Roboto";
+      font-weight: 500;
+      font-size: 18px;
+      color: #282828;
+      text-decoration: none;
+    }
+
+    .desktop-contact-logo {
+      background-color: #5466d5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 8px;
+      padding: 10px 22px;
+      width: fit-content;
+      height: fit-content;
+      cursor: pointer;
+      font-family: "Roboto";
+      font-weight: 600;
+      font-size: 18px;
+      transform: translateY(-10%);
+    }
+    .desktop-contact-logo:hover {
+      background-color: #4356d6;
+    }
+
+    /* ── Mobile ─────────────────────────── */
+    @media (max-width: 768px) {
+      .nav.Desktop {
+        display: none;
+      }
+
+      .nav.Mobile {
+        display: flex;
+        margin: 0;
+        position: relative;
+        z-index: 100;
+      }
+
+      .mobile-topbar {
+        padding: 14px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100vw;
+        box-sizing: border-box;
+      }
+
+      /* Hamburger */
+      .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: center;
+      }
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #282828;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      /* Dim overlay behind drawer */
+      .drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 200;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .drawer-overlay.open {
+        display: block;
+        opacity: 1;
+      }
+
+      /* Slide-in drawer */
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 300px;
+        max-width: 85vw;
+        height: 100vh;
+        background: #ffffff;
+        z-index: 300;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+      }
+      .drawer.open {
+        transform: translateX(0);
+      }
+
+      /* Drawer header */
+      .drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px 16px 20px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .drawer-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #282828;
+        font-size: 22px;
+        line-height: 1;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      .drawer-close:hover {
+        background: #f5f5f5;
+      }
+
+      /* Drawer links */
+      .drawer-links {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 12px 0;
+        overflow-y: auto;
+      }
+      .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 24px;
+        text-decoration: none;
+        font-family: "Roboto";
+        font-size: 16px;
+        font-weight: 500;
+        color: #282828;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .drawer-link img {
+        width: 22px;
+        height: 22px;
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .drawer-link:hover,
+      .drawer-link.active {
+        background: #f0f3ff;
+        color: #4356d6;
+      }
+      .drawer-link:hover img,
+      .drawer-link.active img {
+        opacity: 1;
+      }
+
+      /* Drawer footer */
+      .drawer-footer {
+        padding: 20px;
+        border-top: 1px solid #f0f0f0;
+      }
+      .drawer-contact-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 14px;
+        background: #4356d6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-family: "Roboto";
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .drawer-contact-btn:hover {
+        background: #3345c5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ── Desktop Nav ── -->
+  <div class="nav Desktop">
+    <div class="Logo">
+      <a href="/index.html">
+        <img src="../Elements/Assets/Logo.png" height="58" alt="Logo" />
+      </a>
+    </div>
+
+    <div class="Titles">
+      <a href="#" style="margin: 0; color: #4356d6">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Our Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="btn-primary">
+      <div class="desktop-contact-logo">
+        <img
+          src="../Elements/Assets/Contact-icon.png"
+          width="26"
+          height="26"
+          alt=""
+        />
+        Contact Us
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Mobile Nav ── -->
+  <div class="nav Mobile">
+    <!-- Top bar: logo + hamburger -->
+    <div class="mobile-topbar">
+      <a href="/index.html">
+        <img src="../Elements/Assets/Logo.png" height="40" alt="Logo" />
+      </a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Dim overlay -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Slide-in drawer -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <img src="../Elements/Assets/Logo.png" height="36" alt="Logo" />
+        <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+          ✕
+        </button>
+      </div>
+
+      <nav class="drawer-links">
+        <a href="#" class="drawer-link active">
+          <img src="../Elements/Assets/Home.png" alt="" />
+          Home
+        </a>
+        <a href="#" class="drawer-link">
+          <img src="../Elements/Assets/AboutUs.png" alt="" />
+          About Us
+        </a>
+        <a href="#" class="drawer-link">
+          <img src="../Elements/Assets/Our Services.png" alt="" />
+          Our Services
+        </a>
+        <a href="#" class="drawer-link">
+          <img src="../Elements/Assets/Pricing.png" alt="" />
+          Pricing
+        </a>
+        <a href="#" class="drawer-link">
+          <img src="../Elements/Assets/FAQ.png" alt="" />
+          FAQ
+        </a>
+        <a href="#" class="drawer-link">
+          <img src="../Elements/Assets/Contact.png" alt="" />
+          Contact
+        </a>
+      </nav>
+
+      <div class="drawer-footer">
+        <hover-button
+          text="Contact Us"
+          text-color="#ffffff"
+          hover-text-color="#ffffff"
+          non-hover-color="#4356D6"
+          hover-color="#4356D6"
+          non-hover-border-color="#4356D6"
+          hover-border-color="#4356D6"
+          non-hover-width="213px"
+          hover-width="213px"
+        ></hover-button
+        >>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const drawerClose = document.getElementById("drawerClose");
+    const drawer = document.getElementById("drawer");
+    const overlay = document.getElementById("drawerOverlay");
+
+    function openDrawer() {
+      drawer.classList.add("open");
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden"; // prevent background scroll
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    hamburgerBtn.addEventListener("click", openDrawer);
+    drawerClose.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer); // tap outside to close
+  </script>
+</body>

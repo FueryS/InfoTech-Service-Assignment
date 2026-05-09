@@ -1,0 +1,741 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Final Element Script here -->
+  <script>
+    class ElementLast extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+      }
+
+      connectedCallback() {
+        const image = this.getAttribute("image");
+        const heading = this.getAttribute("heading");
+        const description = this.getAttribute("description");
+
+        this.shadowRoot.innerHTML = `
+          <style>
+            img {
+              height: 34px;
+              width: 34px;
+              flex-shrink: 0;
+            }
+
+            .container {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              max-width: 594px;
+              min-height: 142px;
+              height: auto;
+              border-radius: 8px;
+              padding: 20px;
+              background: #fafbff;
+              box-sizing: border-box;
+              border: 1px solid #e2e7ff;
+            }
+
+            .Texts b {
+              margin-bottom: 11px;
+              display: block;
+              font-family: "Roboto";
+              font-style: normal;
+              font-weight: 600;
+              font-size: clamp(18px, 4vw, 24px);
+              line-height: 1.4;
+              text-transform: capitalize;
+              color: #000000;
+            }
+
+            .Texts {
+              margin-left: 16px;
+              width: 100%;
+              font-family: "Roboto";
+              font-style: normal;
+              font-weight: 400;
+              font-size: clamp(14px, 3vw, 18px);
+              line-height: 1.6;
+              text-transform: capitalize;
+              color: #000000;
+              display: flex;
+              flex-direction: column;
+            }
+          </style>
+
+          <div class="container">
+            <img src="./Elements/Assets/${image}" />
+            <div class="Texts">
+              <b>${heading}</b>
+              ${description}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    customElements.define("element-last", ElementLast);
+  </script>
+
+  <!-- Modular Button Script here -->
+  <script>
+    class HoverButton extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+      }
+
+      connectedCallback() {
+        const text = this.getAttribute("text") || "Get Started";
+        const nonHoverColor = this.getAttribute("non-hover-color") || "#4356d6";
+        const hoverColor = this.getAttribute("hover-color") || "#4356d6";
+        const textColor = this.getAttribute("text-color") || "#ffffff";
+        const hoverTextColor =
+          this.getAttribute("hover-text-color") || textColor;
+        const nonHoverBorder =
+          this.getAttribute("non-hover-border-color") || nonHoverColor;
+        const hoverBorder =
+          this.getAttribute("hover-border-color") || hoverColor;
+        const nonHoverWidth = this.getAttribute("non-hover-width") || "213px";
+        const hoverWidth = this.getAttribute("hover-width") || "213px";
+
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host {
+              display: inline-block;
+              width: 100%;
+            }
+
+            .btn {
+              box-sizing: border-box;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              padding: 14px 22px;
+              gap: 10px;
+              height: 46px;
+              width: 100%;
+              max-width: ${nonHoverWidth};
+              background: ${nonHoverColor};
+              border: 1px solid ${nonHoverBorder};
+              border-radius: 8px;
+              cursor: pointer;
+              transition: max-width 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            }
+
+            .btn:hover {
+              max-width: ${hoverWidth};
+              background: ${hoverColor};
+              border-color: ${hoverBorder};
+            }
+
+            .btn:hover .non-active { display: none; }
+            .btn:hover .active { display: flex; }
+
+            .non-active, .active {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              height: 100%;
+            }
+
+            .active { display: none; }
+
+            .btn-text {
+              font-family: 'Roboto', sans-serif;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              line-height: 21px;
+              text-transform: capitalize;
+              white-space: nowrap;
+              margin: 0;
+            }
+            .non-active .btn-text { color: ${textColor}; }
+            .active .btn-text { color: ${hoverTextColor}; }
+
+            svg { flex-shrink: 0; margin-right: 10px; }
+
+            @media (max-width: 768px) {
+              :host { width: 100%; }
+              .btn {
+                width: 100%;
+                max-width: 100%;
+              }
+              .btn:hover { max-width: 100%; }
+            }
+          </style>
+
+          <div class="btn">
+            <div class="non-active">
+              <p class="btn-text">${text}</p>
+            </div>
+            <div class="active">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.4941 16.6938L16.9881 16.2031L15.8409 15.0504L15.349 15.5412L16.4941 16.6938ZM18.6445 15.9973L20.7148 17.1228L21.4894 15.695L19.4202 14.5705L18.6445 15.9973ZM21.1124 19.3588L19.574 20.8896L20.7191 22.0412L22.2574 20.5115L21.1124 19.3588ZM18.6359 21.3814C17.065 21.5288 13.0025 21.3977 8.60202 17.0232L7.45586 18.1748C12.2572 22.949 16.8278 23.183 18.7875 22.9999L18.6359 21.3814ZM8.60202 17.0232C4.40844 12.8523 3.71294 9.34559 3.62627 7.82351L2.00344 7.91559C2.11177 9.83093 2.97302 13.7179 7.45586 18.1748L8.60202 17.0232ZM10.0916 10.3282L10.4025 10.0183L9.25852 8.86676L8.94761 9.17551L10.0916 10.3282ZM10.6495 6.08043L9.28452 4.25609L7.98344 5.23109L9.34844 7.05434L10.6495 6.08043ZM4.6901 3.85851L2.98927 5.54851L4.13544 6.70118L5.83519 5.01118L4.6901 3.85851ZM9.5196 9.75184C8.94544 9.17551 8.94544 9.17551 8.94544 9.17768H8.94327L8.94002 9.18201C8.88854 9.23392 8.84244 9.2909 8.80244 9.35209C8.74394 9.43876 8.68002 9.55251 8.62586 9.69659C8.49399 10.0685 8.46113 10.4684 8.53052 10.8568C8.67569 11.7939 9.32136 13.0322 10.9745 14.6767L12.1207 13.524C10.5726 11.9857 10.2043 11.0497 10.136 10.6077C10.1035 10.3975 10.1371 10.2935 10.1469 10.2697C10.1534 10.2552 10.1534 10.2531 10.1469 10.2632C10.1372 10.2781 10.1263 10.2923 10.1144 10.3054L10.1035 10.3163L10.0927 10.326L9.5196 9.75184ZM10.9745 14.6767C12.6288 16.3212 13.8735 16.9625 14.8117 17.1055C15.2916 17.1792 15.6784 17.1207 15.9719 17.0113C16.1364 16.9511 16.29 16.8648 16.4269 16.7556L16.4811 16.7068L16.4887 16.7003L16.4919 16.6971L16.493 16.6949C16.493 16.6949 16.4941 16.6938 15.921 16.1175C15.3469 15.5412 15.3501 15.5401 15.3501 15.5401L15.3523 15.5379L15.3544 15.5358L15.3609 15.5303L15.3718 15.5195L15.4129 15.487C15.423 15.4805 15.4205 15.4812 15.4054 15.4892C15.3783 15.4989 15.2721 15.5325 15.0587 15.5C14.6102 15.4307 13.6677 15.0623 12.1207 13.524L10.9745 14.6767ZM9.28452 4.25501C8.17952 2.78168 6.00852 2.54768 4.6901 3.85851L5.83519 5.01118C6.41152 4.43809 7.43419 4.49768 7.98344 5.23109L9.28452 4.25501ZM3.62735 7.82459C3.60569 7.44976 3.77794 7.05759 4.13544 6.70226L2.98819 5.54959C2.40644 6.12809 1.94819 6.94709 2.00344 7.91559L3.62735 7.82459ZM19.574 20.8896C19.2772 21.1864 18.9565 21.3533 18.6369 21.3825L18.7875 22.9999C19.5838 22.9252 20.2349 22.5243 20.7202 22.0423L19.574 20.8896ZM10.4025 10.0183C11.4696 8.95776 11.5487 7.28184 10.6506 6.08151L9.34952 7.05543C9.78611 7.63934 9.72111 8.40526 9.25744 8.86784L10.4025 10.0183ZM20.7159 17.1239C21.6009 17.6049 21.7385 18.7381 21.1134 19.3599L22.2596 20.5115C23.7113 19.0674 23.2639 16.6592 21.4904 15.6961L20.7159 17.1239ZM16.9881 16.2042C17.4041 15.7903 18.0736 15.6885 18.6456 15.9983L19.4213 14.5716C18.2469 13.9324 16.7909 14.109 15.8419 15.0515L16.9881 16.2042Z" fill="white"/>
+              </svg>
+              <p class="btn-text">${text}</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    customElements.define("hover-button", HoverButton);
+  </script>
+
+  <!-- CSS for the Hero Section -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .banner {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin: 56px 56px 80px 80px;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .vector0 {
+      position: absolute;
+      transform: translate(-350px, 80px);
+    }
+
+    .banner-text {
+      font-style: normal;
+      line-height: 85px;
+      text-transform: capitalize;
+      width: 620px;
+      height: 255px;
+      font-size: 64px;
+      font-weight: 700;
+      font-family: "Roboto";
+    }
+
+    .banner-left {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 26px;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .banner-left p {
+      width: 606px;
+      line-height: 32px;
+      font-size: 18px;
+      font-weight: 500;
+      font-family: "Roboto";
+    }
+
+    .banner-image {
+      width: 739.13px;
+      height: 607px;
+    }
+
+    .List-Item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 24px;
+
+      flex-direction: row;
+    }
+
+    h1,
+    p {
+      font-family: "Roboto";
+    }
+
+    /* Section 2 heading */
+    .section2-heading {
+      max-width: 603.5px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 70px;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      color: #000000;
+      flex-wrap: wrap;
+      flex: none;
+      order: 0;
+      flex-grow: 1;
+    }
+
+    .section2-heading b {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 70px;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      color: #4356d6;
+      flex-wrap: wrap;
+      flex: none;
+      order: 0;
+      flex-grow: 1;
+    }
+
+    .section2-body {
+      margin-top: 120px;
+      max-width: 603.5px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 32px;
+      text-transform: capitalize;
+      color: #000000;
+      flex: none;
+      order: 1;
+      flex-grow: 1;
+    }
+
+    /* For a very specific bug after the flex wraps */
+    @media (max-width: 1290px) {
+      .section2-body {
+        margin-bottom: 120px;
+      }
+    }
+
+    /* Section 3 */
+    .section3-image-wrap {
+      height: 469.14px;
+      width: fit-content;
+    }
+
+    .section3-inner {
+      width: 594px;
+      height: 594px;
+      position: relative;
+    }
+
+    /* ─── MOBILE─────────────────── */
+    @media (max-width: 768px) {
+      .banner {
+        flex-direction: column;
+        width: 100%;
+        margin: 26px 0 0 0;
+        padding: 0 16px;
+        align-items: center;
+      }
+
+      .section {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        align-items: center;
+      }
+
+      .banner-text {
+        width: 100%;
+        height: auto;
+        font-size: 34px;
+        text-align: center;
+        line-height: 48px;
+        align-self: center;
+        margin: 0;
+      }
+
+      .vector0 {
+        position: absolute;
+        width: 184.33px;
+        height: 19px;
+        transform: translate(-190px, 40px);
+      }
+
+      .banner-left {
+        width: 100%;
+        margin-top: 26px;
+        align-items: center;
+        gap: 26px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .banner-left p {
+        width: 100%;
+      }
+
+      .banner-image {
+        width: 100%;
+        height: auto;
+        margin-top: 32px;
+      }
+
+      .button-group {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* Section 2 */
+      .section2-heading {
+        font-size: 28px;
+        line-height: 42px;
+        text-align: center;
+        justify-content: center;
+        margin-top: 60px;
+      }
+
+      .section2-heading b {
+        font-size: 28px;
+        line-height: 42px;
+      }
+
+      .section2-body {
+        margin-top: 24px;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 0px;
+      }
+
+      /* Section 3 */
+      .section3-image-wrap {
+        width: 100%;
+        height: auto;
+      }
+
+      .section3-inner {
+        width: 100%;
+        height: auto;
+      }
+
+      #Final-Element {
+        width: 100%;
+        margin-top: 32px;
+      }
+    }
+  </style>
+
+  <!-- CSS for the image section  -->
+  <style>
+    .section3-image-wrap {
+      height: 469.14px;
+      width: fit-content;
+      position: relative;
+    }
+
+    /* For a verys specific bug when the flex wraps the element */
+    @media (max-width: 1290px) {
+      .section3-image-wrap {
+        margin-bottom: 120px;
+      }
+    }
+
+    .section3-inner {
+      width: 594px;
+      height: 594px;
+      position: relative;
+    }
+
+    .section3-vector2 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-80px, -230px);
+    }
+
+    .section3-main-img {
+      width: 474.58px;
+      height: 469.14px;
+      transform: translate(53px, -30px);
+    }
+
+    .section3-vector1 {
+      position: absolute;
+      top: 469.14px;
+      left: 0;
+      transform: translate(-140px, 70px);
+    }
+    @media (max-width: 768px) {
+      .section3-image-wrap {
+        margin-bottom: 0px;
+
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 40px 16px 60px 16px;
+        box-sizing: border-box;
+      }
+
+      .section3-inner {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .section3-main-img {
+        width: 100%;
+        height: auto;
+        transform: none;
+        display: block;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Curly arrow — top right */
+      .section3-vector2 {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(0, -160px);
+        max-width: 60px;
+        height: auto;
+        z-index: 2;
+      }
+
+      /* Chevrons — bottom left */
+      .section3-vector1 {
+        max-width: 85px;
+
+        display: block;
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 0px;
+        transform: translateX(-50px);
+        z-index: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <div class="banner">
+      <div class="section">
+        <div class="banner-left">
+          <div class="banner-text">
+            Simplifying
+            <b style="color: #4356d6">Compliance</b>
+            <svg
+              class="vector0"
+              width="350"
+              height="14"
+              viewBox="0 0 350 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M170.366 7.66686C110.416 6.64323 51.4948 6.82968 10.395 8.89836C7.42091 9.11474 2.7928 7.8592 0.952164 6.50687C-0.879384 5.15615 0.061759 3.72586 2.66132 3.62257C45.1689 1.48277 107.545 2.02874 170.597 3.96146L170.366 7.66686ZM170.723 1.92667C106.572 -0.135083 43.8769 -0.752275 2.13036 1.11749C0.261305 1.21903 0.357413 2.36951 2.46481 2.31338C43.3432 0.258417 106.145 0.681526 170.68 2.62043L170.723 1.92667ZM338.871 13.842C293.424 11.0021 231.361 8.70825 170.366 7.66686L170.597 3.96146C231.982 5.8434 294.007 9.03978 338.964 12.3547C339.888 12.4236 339.974 12.8008 339.947 13.1704C339.917 13.5383 339.773 13.898 338.871 13.842ZM170.68 2.62043C234.663 4.54259 300.347 7.95517 348.047 11.9215C349.485 12.0394 349.754 11.5469 348.257 11.4248C300.674 7.50668 234.968 3.99219 170.723 1.92667L170.68 2.62043Z"
+                fill="#4356D6"
+              />
+            </svg>
+            for Research Analysts
+          </div>
+          <p>
+            Stay focused on your insights—we'll handle the compliance. Our
+            expert solutions ensure your research practices meet every
+            regulatory requirement with confidence and ease
+          </p>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+              font-family: &quot;Roboto&quot;;
+              font-weight: 500;
+              font-size: 18px;
+              color: #282828;
+            "
+          >
+            <div class="List-Item">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="24" height="24" rx="12" fill="#4356D6" />
+                <path
+                  d="M18 7.5L9.23438 16.5L5.25 12.4091"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              End-to-end compliance support
+            </div>
+            <div class="List-Item">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="24" height="24" rx="12" fill="#4356D6" />
+                <path
+                  d="M18 7.5L9.23438 16.5L5.25 12.4091"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Regulatory filings made simple
+            </div>
+            <div class="List-Item">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="24" height="24" rx="12" fill="#4356D6" />
+                <path
+                  d="M18 7.5L9.23438 16.5L5.25 12.4091"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Tailored solutions for independent analysts & firms
+            </div>
+          </div>
+
+          <div class="button-group">
+            <hover-button
+              text="Get Started"
+              text-color="#ffffff"
+              hover-text-color="#ffffff"
+              non-hover-color="#4356D6"
+              hover-color="#4356D6"
+              non-hover-border-color="#4356D6"
+              hover-border-color="#4356D6"
+              non-hover-width="213px"
+              hover-width="213px"
+            ></hover-button>
+            <hover-button
+              text="Book a Consultation"
+              text-color="#4356D6"
+              hover-text-color="#ffffff"
+              non-hover-color="#ffffff"
+              hover-color="#4356D6"
+              non-hover-border-color="#4356D6"
+              hover-border-color="#4356D6"
+              non-hover-width="213px"
+              hover-width="249px"
+            ></hover-button>
+          </div>
+        </div>
+
+        <img class="banner-image" src="./Elements/Assets/Banner Image.png" />
+      </div>
+
+      <!-- Second Section -->
+      <div class="section" style="margin-top: 0px">
+        <div class="banner-left" style="margin-top: 120px">
+          <div class="section2-heading">
+            Why
+            <b>&nbsp;Compliance Matters&nbsp;</b>
+            for Research Analysts
+          </div>
+        </div>
+        <div class="section2-body">
+          In today's regulatory environment, even a small oversight can lead to
+          penalties, reputational risks, and loss of client trust. We help
+          Research Analysts and firms navigate complex compliance requirements
+          so they can focus on delivering high-quality research without worry.
+        </div>
+      </div>
+
+      <!-- Third Section -->
+      <div
+        class="section"
+        style="position: relative; height: fit-content; margin-top: 120px"
+      >
+        <div class="section3-image-wrap">
+          <div class="section3-inner">
+            <img class="section3-vector2" src="./Elements/Assets/Vector2.png" />
+            <img
+              class="section3-main-img"
+              src="./Elements/Assets/Section2-Image.png"
+            />
+            <img class="section3-vector1" src="./Elements/Assets/Vector1.png" />
+          </div>
+        </div>
+
+        <div id="Final-Element"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Thsi will call the NavBar component and insert it into the placeholder div. The hamburger menu logic is inside the .then()
+    // so it runs after the navbar is in the DOM
+    fetch("/Components/NavBar.html")
+      .then((res) => res.text())
+      .then((html) => {
+        document.getElementById("navbar-placeholder").innerHTML = html;
+
+        // Hamburger logic runs HERE, after the navbar is in the DOM
+        const hamburgerBtn = document.getElementById("hamburgerBtn");
+        const drawerClose = document.getElementById("drawerClose");
+        const drawer = document.getElementById("drawer");
+        const overlay = document.getElementById("drawerOverlay");
+
+        function openDrawer() {
+          drawer.classList.add("open");
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeDrawer() {
+          drawer.classList.remove("open");
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        hamburgerBtn.addEventListener("click", openDrawer);
+        drawerClose.addEventListener("click", closeDrawer);
+        overlay.addEventListener("click", closeDrawer);
+      });
+
+    // Same here but no listener so its self explainatory
+    fetch("/Components/Element_last.html")
+      .then((res) => res.text())
+      .then((html) => {
+        document.getElementById("Final-Element").innerHTML = html;
+      });
+  </script>
+</body>
