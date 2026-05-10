@@ -276,8 +276,17 @@
       gap: 12px;
       flex: none;
       order: 0;
+
+      text-align: left;
+      line-height: 32px;
+
       align-self: stretch;
       flex-grow: 0;
+    }
+
+    .List-Item svg {
+      align-self: flex-start;
+      margin-top: 3.5px;
     }
 
     .button-group {
@@ -352,7 +361,7 @@
 
     /* Section 3 */
     .section3-image-wrap {
-      height: 469.14px;
+      height: auto;
       max-width: 50%;
     }
 
@@ -360,6 +369,10 @@
       width: 100%;
       height: auto;
       position: relative;
+    }
+
+    .Final-Element-div {
+      max-width: 50%;
     }
 
     /* ─── MOBILE─────────────────── */
@@ -456,9 +469,8 @@
         height: auto;
       }
 
-      #Final-Element {
-        width: 100%;
-        margin-top: 32px;
+      .Final-Element-div {
+        max-width: 100%;
       }
     }
   </style>
@@ -488,11 +500,17 @@
       position: absolute;
       top: 0;
       right: 0;
-      transform: translate(-257%, -121%);
+      transform: translate(-100px, -167px);
+    }
+
+    @media (max-width: 1425px) {
+      .section3-vector2 {
+        transform: translate(-100px, -120px);
+      }
     }
 
     .section3-main-img {
-      width: 100%;
+      width: 75%;
       height: auto;
     }
 
@@ -507,7 +525,7 @@
         margin-bottom: 0px;
 
         position: relative;
-        max-width: 100%;
+        min-width: 100%;
         height: auto;
         padding: 40px 16px 60px 16px;
         box-sizing: border-box;
@@ -710,7 +728,12 @@
       <!-- Third Section -->
       <div
         class="section"
-        style="position: relative; height: fit-content; margin-top: 120px"
+        style="
+          position: relative;
+          height: fit-content;
+          margin-top: 120px;
+          justify-content: space-between;
+        "
       >
         <div class="section3-image-wrap">
           <div class="section3-inner">
@@ -723,7 +746,7 @@
           </div>
         </div>
 
-        <div id="Final-Element" style="max-width: 50%"></div>
+        <div id="Final-Element" class="Final-Element-div"></div>
       </div>
     </div>
   </main>

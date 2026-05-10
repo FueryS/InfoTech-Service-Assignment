@@ -110,16 +110,26 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 200;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 100;
         opacity: 0;
         transition: opacity 0.3s ease;
+        width: 100vw;
+        height: 100vh;
       }
+
       .drawer-overlay.open {
         display: block;
         opacity: 1;
       }
-
+      /* .drawer-overlay.open::before {
+        z-index: 199;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+      } */
       /* Slide-in drawer */
       .drawer {
         position: fixed;
