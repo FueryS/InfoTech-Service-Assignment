@@ -18,6 +18,8 @@
       height: fit-content;
     }
     .Logo {
+      width: 158px;
+      height: 50px;
       align-self: flex-start;
     }
     .btn-primary {
@@ -25,11 +27,12 @@
     }
     .Titles {
       align-self: center;
+      display: flex;
+      gap: 26px;
     }
 
     .Titles a {
-      margin-left: 26px;
-      font-family: "Roboto";
+      font-family: "Roboto", sans-serif;
       font-weight: 500;
       font-size: 18px;
       color: #282828;
@@ -48,10 +51,10 @@
       gap: 8px;
       padding: 10px 22px;
       width: fit-content;
-      height: fit-content;
+      height: 46px;
       cursor: pointer;
       font-family: "Roboto";
-      font-weight: 600;
+      font-weight: 500;
       font-size: 18px;
       transform: translateY(-10%);
     }
@@ -60,7 +63,7 @@
     }
 
     /* ── Mobile ─────────────────────────── */
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       .nav.Desktop {
         display: none;
       }
@@ -232,7 +235,7 @@
   <div class="nav Desktop">
     <div class="Logo">
       <a href="/index.html">
-        <img src="../Elements/Assets/Logo.png" height="58" alt="Logo" />
+        <img src="../Elements/Assets/Logo.png" height="50px" alt="Logo" />
       </a>
     </div>
 
@@ -322,8 +325,8 @@
           hover-border-color="#4356D6"
           non-hover-width="213px"
           hover-width="213px"
-        ></hover-button
-        >>
+        ></hover-button>
+        <div style="height: 70px"></div>
       </div>
     </div>
   </div>

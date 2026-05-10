@@ -1,22 +1,23 @@
-<style>
-  .elements-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 594px;
-    height: 594px;
-  }
-
-  @media (max-width: 768px) {
+<head>
+  <style>
     .elements-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
       width: 100%;
       height: auto;
-      padding: 0 16px;
     }
-  }
-</style>
 
+    @media (max-width: 850px) {
+      .elements-container {
+        width: 100%;
+        height: auto;
+        padding: 0 16px;
+      }
+    }
+  </style>
+</head>
 <body>
   <div class="elements-container">
     <element-last

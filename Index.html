@@ -1,4 +1,13 @@
 <head>
+  <!-- Fetching the font directly from the google server -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Final Element Script here -->
@@ -39,7 +48,7 @@
             .Texts b {
               margin-bottom: 11px;
               display: block;
-              font-family: "Roboto";
+              font-family: "Roboto", sans-serif;
               font-style: normal;
               font-weight: 600;
               font-size: clamp(18px, 4vw, 24px);
@@ -51,7 +60,7 @@
             .Texts {
               margin-left: 16px;
               width: 100%;
-              font-family: "Roboto";
+              font-family: "Roboto", sans-serif;
               font-style: normal;
               font-weight: 400;
               font-size: clamp(14px, 3vw, 18px);
@@ -115,7 +124,7 @@
               padding: 14px 22px;
               gap: 10px;
               height: 46px;
-              width: 100%;
+              min-width: ${nonHoverWidth};
               max-width: ${nonHoverWidth};
               background: ${nonHoverColor};
               border: 1px solid ${nonHoverBorder};
@@ -125,6 +134,7 @@
             }
 
             .btn:hover {
+            min-width: ${hoverWidth};
               max-width: ${hoverWidth};
               background: ${hoverColor};
               border-color: ${hoverBorder};
@@ -159,7 +169,7 @@
 
             svg { flex-shrink: 0; margin-right: 10px; }
 
-            @media (max-width: 768px) {
+            @media (max-width: 850px) {
               :host { width: 100%; }
               .btn {
                 width: 100%;
@@ -202,6 +212,7 @@
     }
 
     .section {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-evenly;
@@ -216,18 +227,25 @@
     }
 
     .banner-text {
+      width: 100%;
       font-style: normal;
       line-height: 85px;
       text-transform: capitalize;
-      width: 620px;
-      height: 255px;
+
       font-size: 64px;
       font-weight: 700;
-      font-family: "Roboto";
+      font-family: "Roboto", sans-serif;
+    }
+
+    .banner-text .b {
+      color: #4356d6;
+      position: relative;
     }
 
     .banner-left {
-      margin-top: 24px;
+      width: 50%;
+      position: relative;
+      margin-top: 0px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -239,16 +257,17 @@
     }
 
     .banner-left p {
-      width: 606px;
+      width: auto;
       line-height: 32px;
       font-size: 18px;
       font-weight: 500;
-      font-family: "Roboto";
+      font-family: "Roboto", sans-serif;
     }
 
     .banner-image {
-      width: 739.13px;
-      height: 607px;
+      margin: 0;
+      width: 50%;
+      height: auto;
     }
 
     .List-Item {
@@ -270,13 +289,13 @@
 
     h1,
     p {
-      font-family: "Roboto";
+      font-family: "Roboto", sans-serif;
     }
 
     /* Section 2 heading */
     .section2-heading {
-      max-width: 603.5px;
-      font-family: "Roboto";
+      max-width: 100%;
+      font-family: "Roboto", sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 48px;
@@ -292,7 +311,8 @@
     }
 
     .section2-heading b {
-      font-family: "Roboto";
+      max-width: 100%;
+      font-family: "Roboto", sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 48px;
@@ -310,7 +330,8 @@
     .section2-body {
       margin-top: 120px;
       max-width: 603.5px;
-      font-family: "Roboto";
+      width: 50%;
+      font-family: "Roboto", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -332,17 +353,17 @@
     /* Section 3 */
     .section3-image-wrap {
       height: 469.14px;
-      width: fit-content;
+      max-width: 50%;
     }
 
     .section3-inner {
-      width: 594px;
-      height: 594px;
+      width: 100%;
+      height: auto;
       position: relative;
     }
 
     /* ─── MOBILE─────────────────── */
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       .banner {
         flex-direction: column;
         width: 100%;
@@ -402,6 +423,7 @@
 
       /* Section 2 */
       .section2-heading {
+        width: fit-content;
         font-size: 28px;
         line-height: 42px;
         text-align: center;
@@ -410,11 +432,13 @@
       }
 
       .section2-heading b {
+        width: fit-content;
         font-size: 28px;
         line-height: 42px;
       }
 
       .section2-body {
+        width: 100%;
         margin-top: 24px;
         font-size: 16px;
         text-align: center;
@@ -442,8 +466,8 @@
   <!-- CSS for the image section  -->
   <style>
     .section3-image-wrap {
-      height: 469.14px;
-      width: fit-content;
+      height: auto;
+      width: 50%;
       position: relative;
     }
 
@@ -455,8 +479,8 @@
     }
 
     .section3-inner {
-      width: 594px;
-      height: 594px;
+      width: 100%;
+      height: auto;
       position: relative;
     }
 
@@ -464,27 +488,26 @@
       position: absolute;
       top: 0;
       right: 0;
-      transform: translate(-80px, -230px);
+      transform: translate(-257%, -121%);
     }
 
     .section3-main-img {
-      width: 474.58px;
-      height: 469.14px;
-      transform: translate(53px, -30px);
+      width: 100%;
+      height: auto;
     }
 
     .section3-vector1 {
       position: absolute;
-      top: 469.14px;
-      left: 0;
+      bottom: 0;
+      left: 60px;
       transform: translate(-140px, 70px);
     }
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       .section3-image-wrap {
         margin-bottom: 0px;
 
         position: relative;
-        width: 100%;
+        max-width: 100%;
         height: auto;
         padding: 40px 16px 60px 16px;
         box-sizing: border-box;
@@ -541,21 +564,24 @@
       <div class="section">
         <div class="banner-left">
           <div class="banner-text">
-            Simplifying
-            <b style="color: #4356d6">Compliance</b>
-            <svg
-              class="vector0"
-              width="350"
-              height="14"
-              viewBox="0 0 350 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M170.366 7.66686C110.416 6.64323 51.4948 6.82968 10.395 8.89836C7.42091 9.11474 2.7928 7.8592 0.952164 6.50687C-0.879384 5.15615 0.061759 3.72586 2.66132 3.62257C45.1689 1.48277 107.545 2.02874 170.597 3.96146L170.366 7.66686ZM170.723 1.92667C106.572 -0.135083 43.8769 -0.752275 2.13036 1.11749C0.261305 1.21903 0.357413 2.36951 2.46481 2.31338C43.3432 0.258417 106.145 0.681526 170.68 2.62043L170.723 1.92667ZM338.871 13.842C293.424 11.0021 231.361 8.70825 170.366 7.66686L170.597 3.96146C231.982 5.8434 294.007 9.03978 338.964 12.3547C339.888 12.4236 339.974 12.8008 339.947 13.1704C339.917 13.5383 339.773 13.898 338.871 13.842ZM170.68 2.62043C234.663 4.54259 300.347 7.95517 348.047 11.9215C349.485 12.0394 349.754 11.5469 348.257 11.4248C300.674 7.50668 234.968 3.99219 170.723 1.92667L170.68 2.62043Z"
-                fill="#4356D6"
-              />
-            </svg>
+            Simplifying<br />
+            <div class="b">
+              Compliance
+              <svg
+                class="vector0"
+                width="350"
+                height="14"
+                viewBox="0 0 350 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M170.366 7.66686C110.416 6.64323 51.4948 6.82968 10.395 8.89836C7.42091 9.11474 2.7928 7.8592 0.952164 6.50687C-0.879384 5.15615 0.061759 3.72586 2.66132 3.62257C45.1689 1.48277 107.545 2.02874 170.597 3.96146L170.366 7.66686ZM170.723 1.92667C106.572 -0.135083 43.8769 -0.752275 2.13036 1.11749C0.261305 1.21903 0.357413 2.36951 2.46481 2.31338C43.3432 0.258417 106.145 0.681526 170.68 2.62043L170.723 1.92667ZM338.871 13.842C293.424 11.0021 231.361 8.70825 170.366 7.66686L170.597 3.96146C231.982 5.8434 294.007 9.03978 338.964 12.3547C339.888 12.4236 339.974 12.8008 339.947 13.1704C339.917 13.5383 339.773 13.898 338.871 13.842ZM170.68 2.62043C234.663 4.54259 300.347 7.95517 348.047 11.9215C349.485 12.0394 349.754 11.5469 348.257 11.4248C300.674 7.50668 234.968 3.99219 170.723 1.92667L170.68 2.62043Z"
+                  fill="#4356D6"
+                />
+              </svg>
+            </div>
+
             for Research Analysts
           </div>
           <p>
@@ -597,6 +623,7 @@
               <svg
                 width="24"
                 height="24"
+                style="min-width: 24px; min-height: 24px"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -614,6 +641,7 @@
             </div>
             <div class="List-Item">
               <svg
+                style="min-width: 24px; min-height: 24px"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -666,8 +694,8 @@
       <div class="section" style="margin-top: 0px">
         <div class="banner-left" style="margin-top: 120px">
           <div class="section2-heading">
-            Why
-            <b>&nbsp;Compliance Matters&nbsp;</b>
+            Why&nbsp;
+            <b>Compliance Matters&nbsp;</b>
             for Research Analysts
           </div>
         </div>
@@ -695,7 +723,7 @@
           </div>
         </div>
 
-        <div id="Final-Element"></div>
+        <div id="Final-Element" style="max-width: 50%"></div>
       </div>
     </div>
   </main>
